@@ -15,6 +15,18 @@ function get_latest_posts_by_category($request) {
         ),
 
     ));
+    foreach($posts as $post) {
+        $fieldObjects = get_field_objects($post->ID);
+        foreach($fieldObjects as $key => $fieldObject) {
+            $post->$key = get_field($fieldObject['photos'], $post->ID);
+        }
+        $photos =  explode(',', get_field('photos', $post->ID)); 
+        $post->images = [];
+        foreach ($photos as $photo) {
+            $post->images[] = wp_get_attachment_url($photo);
+        }
+        
+    }
     if (empty($posts)) {
     return new WP_Error( 'empty_category', 'there is no post in this category', array('status' => 404) );
 
