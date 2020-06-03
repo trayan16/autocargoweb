@@ -18,7 +18,7 @@ function getUserVehicles($request) {
     foreach($posts as $post) {
         $fieldObjects = get_field_objects($post->ID);
         foreach($fieldObjects as $key => $fieldObject) {
-            $post->$key = get_field($fieldObject['photos'], $post->ID);
+            $post->$key = get_field($key, $post->ID);
         }
         $photos =  explode(',', get_field('photos', $post->ID)); 
         $post->images = [];
