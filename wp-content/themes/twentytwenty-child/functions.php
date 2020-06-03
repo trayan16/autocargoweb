@@ -1,5 +1,5 @@
 <?php
-function get_latest_posts_by_category($request) {
+function getUserVehicles($request) {
     $currentUser  = wp_get_current_user();
 
     $posts = get_posts(array(
@@ -38,9 +38,9 @@ function get_latest_posts_by_category($request) {
     return $response;
 }
 add_action('rest_api_init', function () {
-    register_rest_route( '/wp/v2/', 'users-posts',array(
+    register_rest_route( '/wp/v2/', 'userVehicles',array(
                   'methods'  => 'GET',
-                  'callback' => 'get_latest_posts_by_category'
+                  'callback' => 'getUserVehicles'
         ));
   });
 ?>
